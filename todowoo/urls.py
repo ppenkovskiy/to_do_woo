@@ -22,4 +22,5 @@ urlpatterns = [
     # authentication
     path('signup/', views.signupuser, name="signupuser"),
     # todos
+    path('current/', views.currenttodos, name="currenttodos"),
 ]
