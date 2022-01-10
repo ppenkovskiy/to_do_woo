@@ -42,7 +42,11 @@ def createtodo(request):
     if request.method == "GET":
         return render(request, 'todo/createtodo.html', {'form':TodoForm()})
     else:
-        pass
+        form = TodoForm(request.POST)
+        newtodo = form.save(commit=False)
+        newtodo.user = request.user
+        newtodo.save()
+        return redirect('currenttodos')
 
 def currenttodos(request):
     return render(request, 'todo/currenttodos.html')
