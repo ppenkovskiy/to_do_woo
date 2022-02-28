@@ -51,7 +51,7 @@ def logoutuser(request):
 @login_required
 def createtodo(request):
     if request.method == "GET":
-        return render(request, 'todo/createtodo.html', {'form':TodoForm()})
+        return render(request, 'todo/createtodo.html', {'form': TodoForm()})
     else:
         try:
             form = TodoForm(request.POST)
@@ -60,19 +60,19 @@ def createtodo(request):
             newtodo.save()
             return redirect('currenttodos')
         except ValueError:
-            return render(request, 'todo/createtodo.html', {'form':TodoForm(), 'error':'Bad data passed in. Try again.'})
+            return render(request, 'todo/createtodo.html', {'form': TodoForm(), 'error': 'Bad data passed in. Try again.'})
 
 
 @login_required
 def currenttodos(request):
     todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True)
-    return render(request, 'todo/currenttodos.html', {'todos':todos})
+    return render(request, 'todo/currenttodos.html', {'todos': todos})
 
 
 @login_required
 def completedtodos(request):
-    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=False).order_by('datecompleted')
-    return render(request, 'todo/completedtodos.html', {'todos':todos})
+    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+    return render(request, 'todo/completedtodos.html', {'todos': todos})
 
 
 @login_required
@@ -87,7 +87,7 @@ def viewtodo(request, todo_pk):
             form.save()
             return redirect('currenttodos')
         except ValueError:
-            return render(request, 'todo/viewtodo.html', {'todo':todo, 'form':form, 'error':'Bad info'})
+            return render(request, 'todo/viewtodo.html', {'todo': todo, 'form': form, 'error': 'Bad info'})
 
 
 @login_required
