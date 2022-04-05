@@ -1,0 +1,5 @@
+asgiref==3.5.0
+Django==4.0.3
+pip==22.0.4
+setuptools==57.4.0
+sqlparse==0.4.2
